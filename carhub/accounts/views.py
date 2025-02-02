@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages, auth
 from django.contrib.auth.models import User
 
 
@@ -17,6 +18,7 @@ def register(request):
             if User.objects.filter(username=user_name).exixts():
                 messages.error(request, 'User already exists!')
                 return redirect('register')
+
 
 
 # login - Aimar
