@@ -51,7 +51,10 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-
+#Dashboard
+def dashboard(request):
+    return render(request, 'accounts/dashboard.html', {'user': request.user})
+    
 
 # login - Aimar
 # dashboard -  Sander
