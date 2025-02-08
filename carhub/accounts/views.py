@@ -19,7 +19,20 @@ def register(request):
                 messages.error(request, 'User already exists!')
                 return redirect('register')
 
+def login(request):
+    if request.method == 'POST':
+        user_name = request.POST['username']
+        password = request.POST['password']
 
+        user = auth.authenticate(username=user_name, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'You are now logged in!')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid username or password!')
+            return redirect('login')
 
 # login - Aimar
 # dashboard -  Sander
