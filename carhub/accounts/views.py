@@ -1,9 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from django.contrib import messages
 
-
-# Create your views here.
 # Register function
 def register(request):
     if request.method == 'POST':
@@ -14,10 +12,31 @@ def register(request):
         password = request.POST['password']
         confirm_password = request.POST['confirm_password']
 
-        if password == confirm_password:
-            if User.objects.filter(username=user_name).exixts():
-                messages.error(request, 'User already exists!')
-                return redirect('register')
+        # Checking if username already exists
+        if User.objects.filter(username=user_name).exists():
+            messages.error(request, 'Username already exists!')
+            return redirect('register')
+
+        # Checking if email already exists
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already in use!')
+            return redirect('register')
+
+        # Checking if passwords match
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match!')
+            return redirect('register')
+
+        # Creating the user
+        user = User.objects.create_user(username=user_name, email=email, password=password)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.save()
+
+        messages.success(request, 'Registration successful! You can now log in.')
+        return redirect('login')
+
+    return render(request, 'register.html')
 
 def login(request):
     if request.method == 'POST':
@@ -33,6 +52,8 @@ def login(request):
         else:
             messages.error(request, 'Invalid username or password!')
             return redirect('login')
+
+
 
 # login - Aimar
 # dashboard -  Sander
