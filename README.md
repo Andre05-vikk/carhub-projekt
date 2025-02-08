@@ -23,27 +23,39 @@ In the urls.py
 ## Accounts Templates 
 
 **register.html**  - The html page that displays the registration page of the website
+
 **login.html**  - The html page that displays the login page of the website
+
 **dashboard.html** - The html page that displays the dashboard page of the website
 
 ## Pages app
 In the views.py
 **home functionality** - The function that takes request as a parameter that allows user to see the main page.
+
 **about functionality** - The function takes request and allow user to know about the company
+
 **services functionality**  - The function taske the request and render all the posible services
+
 **contact functionality**  - The function allow user to contact via the site
 
 In the urls.py
 **'' url** - It maps the url to the views of the home function 
+
 **about url**  - It maps the url to the view of the *about function
+
 **services** - It maps the url to the view of the ervices function
+
 **contact** - it maps the url to the view of the contact function
 
 ## Pages Templates 
 **home.html**  - The html page that displays the home page of the website
+
 **about.html**  - The html page that displays the about page of the website
+
 **services.html** - The html page that displays the services page of the website
+
 **contact.html** - The html page that displays the contact page of the website
+
 **base.html**  - This will hold code that will be use accross pages html
 
 
