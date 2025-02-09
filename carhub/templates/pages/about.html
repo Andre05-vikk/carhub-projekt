@@ -1,15 +1,67 @@
-{% extends 'pages/base.html' %}
+{% extends "pages/base.html" %}
+
 {% block content %}
-    <h1>About CarHub</h1>
-    <p>CarHub is the ultimate platform for buying and selling cars effortlessly.</p>
+<div class="container text-center mt-5">
+    <!-- Breadcrumb navigation -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light p-3 rounded shadow-sm d-inline-block">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+        </ol>
+    </nav>
 
-    <h2>Why Choose CarHub?</h2>
-    <ul>
-        <li>Find the best car deals in one place</li>
-        <li>Trusted sellers and secure transactions</li>
-        <li>Easy-to-use interface for smooth browsing</li>
-    </ul>
+    <!-- Peamine sisu -->
+    <div class="d-flex flex-column align-items-center mt-4">
+        <!-- Pilt keskel -->
+        <div class="image-container">
+            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg"
+                 class="img-fluid rounded shadow-lg main-image" alt="Car Image">
+        </div>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
+            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
+            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
+        </div>
 
-    <h2>How It Works?</h2>
-    <p>Simply create an account, browse available cars, and connect with sellers in just a few clicks.</p>
+        <!-- Tekst paremal -->
+        <div class="text-container mt-4 text-center">
+            <h2 class="text-uppercase fw-bold">
+                Welcome to <span class="text-danger">Car Hub</span>
+            </h2>
+            <p class="lead text-muted">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </p>
+            <p>
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+            </p>
+        </div>
+    </div>
+
+    <!-- Executive Team Section -->
+    <div class="text-center mt-5">
+        <h3 class="fw-bold display-5">Executive <span class="text-danger">Team</span></h3>
+        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    .main-image {
+        width: 100%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+    .small-image {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+    }
+    .text-container {
+        max-width: 700px;
+    }
+    .breadcrumb {
+        font-size: 1rem;
+    }
+</style>
 {% endblock %}
