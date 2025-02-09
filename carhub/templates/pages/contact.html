@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Contact Us</title>
-</head>
-<body>
-  <p>You will be able to contact us here!</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Contact <span class="text-danger">Us</span></h2>
+    <p class="text-center text-muted">If you have any questions please contact us using the below form</p>
+    <div class="row mt-4">
+        <!-- Contact Form -->
+        <div class="col-md-8">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="full_name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <input type="text" name="phone" class="form-control" placeholder="Phone Number">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <textarea name="message" class="form-control" rows="5" placeholder="Write message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger w-100">SEND MESSAGE</button>
+            </form>
+        </div>
+        <!-- Contact Info -->
+        <div class="col-md-4">
+            <div class="p-4 bg-light rounded">
+                <p><strong>Phone:</strong> +372 555 5555</p>
+                <p><strong>Email:</strong> info@te.com</p>
+                <p><strong>Web:</strong> www.carhub.com</p>
+                <p><strong>Fax:</strong> +1-917-987-6543</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
