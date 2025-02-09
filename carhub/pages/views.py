@@ -12,6 +12,10 @@ def home(request):
 
     return render(request, 'pages/home.html', data)
 
+def services(request):
+    
+    return render(request, 'pages/services.html')
+
 
 # contact - Aimar
 # services -  Sander
