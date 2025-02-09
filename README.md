@@ -67,4 +67,27 @@ In the urls.py
 
 **base.html**  - This will hold code that will be use accross pages html
 
+## cars app
+In the views.py
+**cars functionality** - The function that takes request as a parameter that allows user to see the main cars featured on the webpage (we need a models).
+
+**car_detail functionality** - The function takes request, id and allow user to know more about the details of the car
+
+**search functionality**  - The function takes the request and allow user to be able to search for car
+
+In the urls.py
+**'' url** - It maps the url to the views of the cars function 
+
+**'<int:id>' url**  - It maps the url to the view of the car detail function
+
+**search** - It maps the url to the view of the search function
+
+## cars Templates 
+**cars.html**  - The html page that displays the car page of the website
+
+**car_detail.html**  - The html page that displays the information about the car on the website
+
+**search.html** - The html page that allow user to search for a car.
+
+
 
