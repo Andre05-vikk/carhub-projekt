@@ -54,7 +54,14 @@ def login(request):
 #Dashboard
 def dashboard(request):
     return render(request, 'accounts/dashboard.html', {'user': request.user})
-    
+
+#Logout.method from Andrei.G
+def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You logged out!')
+        return redirect('home')
+    return redirect('home')
 
 # login - Aimar
 # dashboard -  Sander
