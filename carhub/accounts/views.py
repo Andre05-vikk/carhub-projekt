@@ -57,9 +57,11 @@ def dashboard(request):
 
 #Logout.method from Andrei.G
 def logout(request):
-    auth.logout(request)
-    messages.success(request, 'You logged out!')
-    return render(request, 'accounts/logout.html')  # added new template when u logged out you will go on logout.html    
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You logged out!')
+        return redirect('home')
+    return redirect('home')
 
 # login - Aimar
 # dashboard -  Sander
