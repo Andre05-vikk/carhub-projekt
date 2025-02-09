@@ -1,67 +1,110 @@
 {% extends "pages/base.html" %}
-
+{% load static %}
 {% block content %}
-<div class="container text-center mt-5">
-    <!-- Breadcrumb navigation -->
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-light p-3 rounded shadow-sm d-inline-block">
-            <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">About Us</li>
-        </ol>
-    </nav>
 
-    <!-- Peamine sisu -->
-    <div class="d-flex flex-column align-items-center mt-4">
-        <!-- Pilt keskel -->
-        <div class="image-container">
-            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg"
-                 class="img-fluid rounded shadow-lg main-image" alt="Car Image">
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>About Us</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">About Us</li>
+            </ul>
         </div>
-        <div class="d-flex justify-content-center gap-2 mt-3">
-            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
-            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
-            <img src="https://www.mad4wheels.com/img/slideshow/desktop/slideshow-609.jpg" class="img-thumbnail small-image">
-        </div>
-
-        <!-- Tekst paremal -->
-        <div class="text-container mt-4 text-center">
-            <h2 class="text-uppercase fw-bold">
-                Welcome to <span class="text-danger">Car Hub</span>
-            </h2>
-            <p class="lead text-muted">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-            </p>
-            <p>
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-            </p>
-        </div>
-    </div>
-
-    <!-- Executive Team Section -->
-    <div class="text-center mt-5">
-        <h3 class="fw-bold display-5">Executive <span class="text-danger">Team</span></h3>
-        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
     </div>
 </div>
+<!-- Sub Banner end -->
 
-<!-- Custom Styles -->
-<style>
-    .main-image {
-        width: 100%;
-        max-width: 600px;
-        border-radius: 10px;
-    }
-    .small-image {
-        width: 80px;
-        height: 60px;
-        object-fit: cover;
-    }
-    .text-container {
-        max-width: 700px;
-    }
-    .breadcrumb {
-        font-size: 1rem;
-    }
-</style>
+<!-- Service center strat -->
+<div class="about-car content-area-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-6">
+                <div class="about-car-photo">
+                    <div id="carDetailsSlider" class="carousel car-details-sliders slide">
+                        <!-- main slider carousel items -->
+                        <div class="carousel-inner">
+                            <div class="active item carousel-item" data-slide-number="0">
+                                <img src="{% static 'img/car/car-1.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="1">
+                                <img src="{% static 'img/car/car-2.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                            <div class="item carousel-item" data-slide-number="2">
+                                <img src="{% static 'img/car/car-3.jpg' %}" class="img-fluid" alt="slider-car">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls -->
+                        <ul class="carousel-indicators car-properties list-inline nav nav-justified">
+                            <li class="list-inline-item active">
+                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car/car-1.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-1" data-slide-to="1" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car/car-2.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a id="carousel-selector-2" data-slide-to="2" data-target="#carDetailsSlider">
+                                    <img src="{% static 'img/car/car-3.jpg' %}" class="img-fluid" alt="small-car">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-7 col-lg-6 align-self-center">
+                <div class="best-used-car">
+                    <h3>Welcome to <span>Car hub</span></h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has</p>
+                    <p class="mb-0">electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Service center end -->
+
+
+
+<!-- Our team start -->
+<div class="our-team content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Executive <span>Team</span></h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+        </div>
+        <!-- Slick slider area start -->
+        <div class="slick-slider-area clearfix">
+            <div class="row slick-carousel" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                {% for team in teams %}
+                <div class="slick-slide-item">
+                    <div class="team-1">
+                        <div class="photo">
+                            <a href="#">
+                                <img src="{{ team.photo.url }}" alt="team-1" class="img-fluid">
+                            </a>
+                            <div class="social-list clearfix">
+                                <a href="{{team.facebook_link}}" class="facebook-bg"><i class="fa fa-facebook"></i></a>
+                                <a href="{{team.twitter_link}}" class="twitter-bg"><i class="fa fa-twitter"></i></a>
+                                <a href="{{team.github_link}}" class="github-bg"><i class="fa fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="details">
+                            <h4><a href="team-detail.html">{{team.first_name}} {{team.last_name}}</a></h4>
+                            <h5>{{team.designation}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Our team end -->
+
+
 {% endblock %}
