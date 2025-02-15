@@ -1,19 +1,31 @@
 from django.shortcuts import render
+from .models import Car
 
 # Create your views here.
 
 def cars(request):
-    # Aimar
-    # create cars variable and assign the Car.objects by ordering it by the created_date
-    # create a car_title_search variable, then assign the distinct value list from the car objects
-    # create a state_search variable, then assign the distinct value list from the car objects
-    # create a year_search variable, then assign the distinct value list from the car objects
-    # create a body_style_search variable, then assign the distinct value list from the car objects
+    """View function to list cars and provide search filters."""
 
-    # create a data dictionary and pass down the variables above as key value pairs
+    # Get all cars ordered from oldest to newest
+    cars = Car.objects.order_by('-created_date')
 
-    # return the render function, passing request, the cars.html template and the data
-    pass
+    # Fetch distinct values for search filters
+    car_title_search = Car.objects.values_list('title', flat=True).distinct()
+    state_search = Car.objects.values_list('state', flat=True).distinct()
+    year_search = Car.objects.values_list('year', flat=True).distinct()
+    body_style_search = Car.objects.values_list('body_style', flat=True).distinct()
+
+    # Prepare data to pass to the template
+    data = {
+        'cars': cars,
+        'car_title_search': car_title_search,
+        'state_search': state_search,
+        'year_search': year_search,
+        'body_style_search': body_style_search,
+        }
+
+    # Render the cars.html template with the context data
+    return render(request, 'cars/cars.html', data)
 
 def car_detail(request, id):
     #Andre
