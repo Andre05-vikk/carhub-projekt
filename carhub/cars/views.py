@@ -1,24 +1,29 @@
 from django.shortcuts import render
 from .models import Car
+from django.core.paginator import EmptyPage, PageNotAnInterger, Paginator
 
 # Create your views here.
 
 def cars(request):
-    """View function to list cars and provide search filters."""
-
     # Get all cars ordered from oldest to newest
     cars = Car.objects.order_by('-created_date')
 
+    paginator = Paginator(cars, 4)
+    page = request.GET.get('page')
+    paged_cars = paginator.get_page(page)
+
     # Fetch distinct values for search filters
-    car_title_search = Car.objects.values_list('title', flat=True).distinct()
+    car_title_search = Car.objects.values_list('car_title', flat=True).distinct()
+    model_search = Car.objects.values_list('model', flat=True).distinct()
     state_search = Car.objects.values_list('state', flat=True).distinct()
     year_search = Car.objects.values_list('year', flat=True).distinct()
     body_style_search = Car.objects.values_list('body_style', flat=True).distinct()
 
     # Prepare data to pass to the template
     data = {
-        'cars': cars,
+        'cars': paged_cars,
         'car_title_search': car_title_search,
+        'model_search': model_search,
         'state_search': state_search,
         'year_search': year_search,
         'body_style_search': body_style_search,
