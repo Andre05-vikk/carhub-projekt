@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cars.apps.CarsConfig',
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
