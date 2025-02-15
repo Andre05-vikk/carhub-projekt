@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'ckeditor',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
