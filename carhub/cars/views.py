@@ -70,3 +70,6 @@ def search(request):
 
     # return the render function, passing request, the car search.html template and the data
     pass
+
+
+#  Andre - should handle the car_detail html

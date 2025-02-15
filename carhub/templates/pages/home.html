@@ -155,10 +155,10 @@
                         </div>
                         <div class="detail">
                             <h1 class="title">
-                                <a href="">{{ car.year }} {{ car.car_title }} {{ car.model }}</a>
+                                <a href="{% url 'car_detail' car.id %}">{{ car.year }} {{ car.car_title }} {{ car.model }}</a>
                             </h1>
                             <div class="location">
-                                <a href="">
+                                <a href="{% url 'car_detail' car.id %}">
                                     <i class="flaticon-pin"></i>{{ car.city }}, {{ car.state }}
                                 </a>
                             </div>
@@ -253,10 +253,10 @@
                     </div>
                     <div class="detail">
                         <h1 class="title">
-                            <a href="">{{ car.year }} {{ car.car_title }} {{ car.model }}</a>
+                            <a href="{% url 'car_detail' car.id %}">{{ car.year }} {{ car.car_title }} {{ car.model }}</a>
                         </h1>
                         <div class="location">
-                            <a href="">
+                            <a href="{% url 'car_detail' car.id %}">
                                 <i class="flaticon-pin"></i>{{ car.city }}, {{ car.state }}
                             </a>
                         </div>
