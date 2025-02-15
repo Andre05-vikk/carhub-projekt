@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Car
 from django.core.paginator import EmptyPage, PageNotAnInterger, Paginator
 
@@ -33,11 +33,16 @@ def cars(request):
     return render(request, 'cars/cars.html', data)
 
 def car_detail(request, id):
-    #Andre
-    # Create a single_car variable that receives car object from a function called get_object_or_404
-    # create a data dictionary and pass down the variable above as key value pairs
-    # return the render function, passing request, the car_detail.html template and the data
-    pass
+    # Get the car object or return 404 if not found
+    single_car = get_object_or_404(Car, pk=id)
+    
+    # Create data dictionary with the car object
+    data = {
+        'single_car': single_car,
+    }
+    
+    # Render the template with the data
+    return render(request, 'cars/car_detail.html', data)
 
 def search(request):
     # Sander
