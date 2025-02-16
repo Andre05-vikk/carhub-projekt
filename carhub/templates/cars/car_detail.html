@@ -1,10 +1,250 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'pages/base.html' %}
+{% load static %}
+{% load humanize %}
 
-</body>
-</html>
+{% block content %}
+<div class="sub-banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-uppercase">{{ single_car.year }} {{ single_car.car_title }}</h1>
+                <p class="location"><i class="fas fa-map-marker-alt"></i> {{ single_car.city }}, {{ single_car.state }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8">
+
+            <!-- Main Image -->
+            <div class="main-image mb-3">
+                <img src="{% static 'img/car-1.jpg' %}" class="img-fluid w-100" alt="{{ single_car.car_title }}">
+            </div>
+
+            <!-- Thumbnail Gallery -->
+            <div class="row gallery mb-4">
+                <div class="col-3 px-1">
+                    <img src="{% static 'img/car-2.jpg' %}" class="img-fluid thumbnail" alt="Car photo 1">
+                </div>
+                <div class="col-3 px-1">
+                    <img src="{% static 'img/car-3.jpg' %}" class="img-fluid thumbnail" alt="Car photo 2">
+                </div>
+                <div class="col-3 px-1">
+                    <img src="{% static 'img/car-4.jpg' %}" class="img-fluid thumbnail" alt="Car photo 3">
+                </div>
+                <div class="col-3 px-1">
+                    <img src="{% static 'img/car-5.jpg' %}" class="img-fluid thumbnail" alt="Car photo 4">
+                </div>
+            </div>
+
+            <!-- Vehicle Overview -->
+            <div class="overview-section mb-4">
+                <h2>Vehicle Overview</h2>
+                <div class="row specs">
+                    <div class="col-sm-6">
+                        <div class="spec-item">
+                            <span class="label">Body Style:</span>
+                            <span class="value">{{ single_car.body_style }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Engine:</span>
+                            <span class="value">{{ single_car.engine }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Transmission:</span>
+                            <span class="value">{{ single_car.transmission }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Exterior:</span>
+                            <span class="value">{{ single_car.color }}</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="spec-item">
+                            <span class="label">Interior:</span>
+                            <span class="value">{{ single_car.interior }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Kilometers:</span>
+                            <span class="value">{{ single_car.miles|intcomma }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Doors:</span>
+                            <span class="value">{{ single_car.doors }}</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="label">Passengers:</span>
+                            <span class="value">{{ single_car.passengers }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div class="description-section mb-4">
+                <h2>Description</h2>
+                <div class="description-content">
+                    {{ single_car.description|safe }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <div class="price-box mb-3">
+                <h2 class="price">${{ single_car.price|intcomma }}</h2>
+                <button class="btn btn-danger btn-block">SEND MESSAGE</button>
+            </div>
+
+            <div class="details-box mb-3">
+                <h3>Refine Your Search</h3>
+                <div class="specs-list">
+                    <div class="spec-item">
+                        <span class="label">Body Style:</span>
+                        <span class="value">{{ single_car.body_style }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Engine:</span>
+                        <span class="value">{{ single_car.engine }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Transmission:</span>
+                        <span class="value">{{ single_car.transmission }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Exterior:</span>
+                        <span class="value">{{ single_car.color }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Interior:</span>
+                        <span class="value">{{ single_car.interior }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Kilometers:</span>
+                        <span class="value">{{ single_car.miles|intcomma }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Doors:</span>
+                        <span class="value">{{ single_car.doors }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Passengers:</span>
+                        <span class="value">{{ single_car.passengers }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Vin #:</span>
+                        <span class="value">{{ single_car.vin_no }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Fuel Type:</span>
+                        <span class="value">{{ single_car.fuel_type }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="label">Owners:</span>
+                        <span class="value">{{ single_car.no_of_owners }}</span>
+                    </div>
+                </div>
+            </div>
+
+                        <div class="contact-box">
+                <h3>Questions?</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> {{ single_car.city }}</p>
+                    <p><i class="fas fa-envelope"></i> tolu@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +372mynumber</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.sub-banner {
+    background: #f7f7f7;
+    padding: 30px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.sub-banner h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.location {
+    color: #777;
+}
+
+.main-image {
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gallery .thumbnail {
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.gallery .thumbnail:hover {
+    opacity: 0.8;
+}
+
+.overview-section h2,
+.description-section h2,
+.details-box h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.specs .spec-item,
+.specs-list .spec-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.spec-item .label {
+    color: #666;
+    font-weight: 600;
+}
+
+.price-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.price-box .price {
+    color: #dc3545;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.details-box,
+.contact-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+.contact-info i {
+    width: 20px;
+    color: #dc3545;
+}
+
+.btn-danger {
+    padding: 12px;
+    font-weight: 600;
+}
+</style>
+{% endblock %}
