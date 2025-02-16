@@ -1,5 +1,6 @@
 {% extends 'pages/base.html' %}
 {% block title %} | Search Results {% endblock %}
+{% load humanize %}
 {% block content %}
 
 <div class="sub-banner overview-bgi">
@@ -18,7 +19,7 @@
 <!-- Search Filters start -->
 <div class="car-search-filters" style="background-color: red; padding: 20px;">
     <div class="container">
-        <form action="{% url 'cars:search' %}" method="GET">
+        <form action="{% url 'search' %}" method="GET">
             {% include 'includes/messages.html' %}
             <div class="row">
                 <div class="col-lg-12">
@@ -110,26 +111,95 @@
 <!-- Search Filters end -->
 
 <!-- Search Results Section start -->
-{% if cars %}
-<div class="search-results" style="margin-top: 100px;">
+<div class="featured-car content-area">
     <div class="container">
-        <h2 class="text-center" style="font-weight: bold;">Here are your <span style="color: red;">Cars</span></h2>
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Here are  your <span>Cars</span></h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
         <div class="row">
             {% for car in cars %}
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="car-listing">
-                    <a href="">
-                        <img src="{{ car.image.url }}" alt="{{ car.car_title }}" class="img-fluid">
-                    </a>
-                    <h3>{{ car.car_title }}</h3>
-                    <p>{{ car.year }} - {{ car.model }} - {{ car.price }}€</p>
+            <div class="col-lg-4 col-md-6">
+                <div class="car-box">
+                    <div class="car-thumbnail">
+                        <a href="{% url 'car_detail' car.id %}" class="car-img">
+                            <div class="tag">For Rent</div>
+                            <img class="d-block w-100" src="{{car.car_photo.url}}" alt="car" style="min-height: 262px; max-height: 262px;">
+                            <div class="facilities-list clearfix">
+                                <ul>
+                                    <li>
+                                        <span><i class="flaticon-way"></i></span>{{ car.miles | intcomma }} km
+                                    </li>
+                                    <li>
+                                        <span><i class="flaticon-calendar-1"></i></span>{{car.year}}
+                                    </li>
+                                    <li>
+                                        <span><i class="flaticon-manual-transmission"></i></span>{{car.transmission}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </a>
+                        <div class="carbox-overlap-wrapper">
+                            <div class="overlap-box">
+                                <div class="overlap-btns-area">
+                                    <a class="overlap-btn" data-toggle="modal" data-target="#carOverviewModal">
+                                        <i class="fa fa-eye-slash"></i>
+                                    </a>
+                                    <div class="car-magnify-gallery">
+                                        <a href="{{car.car_photo.url}}" class="hidden" data-sub-html="<h4>Lexus GS Red Car</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy....</p>">
+                                            <img class="hidden" src="{{car.car_photo.url}}" alt="hidden-img">
+                                        </a>
+                                        {% if car.car_photo_1 %}
+                                        <a href="{{car.car_photo_1.url}}" class="hidden" data-sub-html="<h4>2015 Porsche Cayenne</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy....</p>">
+                                            <img class="hidden" src="{{car.car_photo_1.url}}" alt="hidden-img">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_2 %}
+                                        <a href="{{car.car_photo_2.url}}" class="hidden" data-sub-html="<h4>Toyota Corolla</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy....</p>">
+                                            <img class="hidden" src="{{car.car_photo_2.url}}" alt="hidden-img">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_3 %}
+                                        <a href="{{car.car_photo_3.url}}" class="hidden" data-sub-html="<h4>Lamborghini Huracán</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy....</p>">
+                                            <img class="hidden" src="{{car.car_photo_3.url}}" alt="hidden-img">
+                                        </a>
+                                        {% endif %}
+                                        {% if car.car_photo_4 %}
+                                        <a href="{{car.car_photo_4.url}}" class="overlap-btn" data-sub-html="<h4>Audi Q7 2018</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy....</p>">
+                                            <i class="fa fa-expand"></i>
+                                            <img class="hidden" src="{{car.car_photo_4.url}}" alt="hidden-img">
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <h1 class="title">
+                            <a href="{% url 'car_detail' car.id %}">{{car.year}} {{car.car_title}} {{car.model}}</a>
+                        </h1>
+                        <div class="location">
+                            <a href="{% url 'car_detail' car.id %}">
+                                <i class="flaticon-pin"></i>{{car.city}}, {{car.state}}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="footer clearfix">
+                        <div class="pull-left ratings days">
+                            <p class="cartype">{{car.body_style}}</p>
+                        </div>
+                        <div class="pull-right">
+                            <p class="price">${{car.price | intcomma}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
-{% endif %}
 <!-- Search Results Section end -->
 
 <script>
