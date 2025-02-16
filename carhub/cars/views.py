@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Car
-from django.core.paginator import EmptyPage, PageNotAnInterger, Paginator
+from django.core.paginator import Paginator
 
 # Create your views here.
 
@@ -27,7 +27,7 @@ def cars(request):
         'state_search': state_search,
         'year_search': year_search,
         'body_style_search': body_style_search,
-        }
+    }
 
     # Render the cars.html template with the context data
     return render(request, 'cars/cars.html', data)
