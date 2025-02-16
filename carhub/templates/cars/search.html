@@ -1,10 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'pages/base.html' %}
+{% block title %} | Search Results {% endblock %}
+{% block content %}
 
-</body>
-</html>
+<div class="sub-banner overview-bgi">
+    <div class="container breadcrumb-area">
+        <div class="breadcrumb-areas">
+            <h1>Search Cars</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active">Search</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Sub Banner end -->
+
+<!-- Search Filters start -->
+<div class="car-search-filters" style="background-color: red; padding: 20px;">
+    <div class="container">
+        <form action="{% url 'cars:search' %}" method="GET">
+            {% include 'includes/messages.html' %}
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row filters" style="background-color: red; padding: 10px; border-radius: 10px;">
+                        <!-- First Row -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="car_title" class="form-control" id="brand" style="background-color: white;">
+                                    <option value="">Select Brand</option>
+                                    {% for car in car_title_search %}
+                                    <option value="{{ car }}">{{ car }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="model" class="form-control" id="model" style="background-color: white;">
+                                    <option value="">Select Model</option>
+                                    {% for model in model_search %}
+                                    <option value="{{ model }}">{{ model }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="state" class="form-control" id="state" style="background-color: white;">
+                                    <option value="">Select State</option>
+                                    {% for state in state_search %}
+                                    <option value="{{ state }}">{{ state }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="year" class="form-control" id="year" style="background-color: white;">
+                                    <option value="">Select Year</option>
+                                    {% for year in year_search %}
+                                    <option value="{{ year }}">{{ year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Second Row -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="body_style" class="form-control" id="type" style="background-color: white;">
+                                    <option value="">Select Type of Car</option>
+                                    {% for style in body_style_search %}
+                                    <option value="{{ style }}">{{ style }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <select name="transmission" class="form-control" id="transmission" style="background-color: white;">
+                                    <option value="">Transmission</option>
+                                    {% for trans in transmission_search %}
+                                    <option value="{{ trans }}">{{ trans }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group w-100">
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <input type="range" class="form-control-range w-100" id="priceRange" name="priceRange" min="0" max="150000" step="1000" value="75000" style="background-color: white;" oninput="updatePriceLabels(this)">
+                                    <div class="d-flex justify-content-between w-100" style="font-size: 0.75rem; color: white;">
+                                        <span id="minPrice">0 EUR</span>
+                                        <span id="maxPrice">150,000 EUR</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-center">
+                            <button type="submit" class="btn btn-md button-theme w-100" style="background-color: black; color: white;">
+                                <i class="fa fa-search" aria-hidden="true"></i> Find
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- Search Filters end -->
+
+<!-- Search Results Section start -->
+{% if cars %}
+<div class="search-results" style="margin-top: 100px;">
+    <div class="container">
+        <h2 class="text-center" style="font-weight: bold;">Here are your <span style="color: red;">Cars</span></h2>
+        <div class="row">
+            {% for car in cars %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="car-listing">
+                    <a href="">
+                        <img src="{{ car.image.url }}" alt="{{ car.car_title }}" class="img-fluid">
+                    </a>
+                    <h3>{{ car.car_title }}</h3>
+                    <p>{{ car.year }} - {{ car.model }} - {{ car.price }}€</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+<!-- Search Results Section end -->
+
+<script>
+function updatePriceLabels(slider) {
+    const minPriceLabel = document.getElementById('minPrice');
+    const maxPriceLabel = document.getElementById('maxPrice');
+
+    const value = parseInt(slider.value);
+    const min = parseInt(slider.min);
+    const max = parseInt(slider.max);
+
+    minPriceLabel.innerText = `${min} EUR`;
+    maxPriceLabel.innerText = `${value} EUR`;
+}
+</script>
+
+{% endblock %}
