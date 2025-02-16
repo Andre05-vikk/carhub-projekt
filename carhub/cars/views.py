@@ -47,15 +47,16 @@ def car_detail(request, id):
 def search(request):
     cars = Car.objects.order_by('-created_date')  # Fetch all cars initially
 
+    # Getting the filters from the request
     car_title = request.GET.get('car_title')
     model = request.GET.get('model')
     state = request.GET.get('state')
     year = request.GET.get('year')
     body_style = request.GET.get('body_style')
     transmission = request.GET.get('transmission')
-    min_price = request.GET.get('min_price')
-    max_price = request.GET.get('max_price')
+    price = request.GET.get('price')  # Single price value (from slider)
 
+    # Apply filters to the queryset
     if car_title and car_title.strip():
         cars = cars.filter(car_title__iexact=car_title.strip())
 
@@ -74,13 +75,13 @@ def search(request):
     if transmission and transmission.strip():
         cars = cars.filter(transmission__iexact=transmission.strip())
 
-    if min_price and max_price:
+    # Handle price filter (from slider)
+    if price:
         try:
-            min_price = int(min_price)
-            max_price = int(max_price)
-            cars = cars.filter(price__gte=min_price, price__lte=max_price)
+            price = int(price)
+            cars = cars.filter(price__lte=price)  # Filter cars with price less than or equal to the selected value
         except ValueError:
-            pass  # Ignore invalid input
+            pass  # Ignore invalid input (non-integer)
 
     # Fetch distinct values for dropdown menus
     car_title_search = Car.objects.values_list('car_title', flat=True).distinct()
@@ -98,9 +99,7 @@ def search(request):
         'year_search': year_search,
         'body_style_search': body_style_search,
         'transmission_search': transmission_search,
-        'cars': cars if request.GET else None,
     }
 
     return render(request, 'cars/search.html', data)
-
 #  Andre - should handle the car_detail html
